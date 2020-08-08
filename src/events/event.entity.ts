@@ -25,10 +25,10 @@ export class Event extends BaseEntity {
 	@Column({ name: 'expected_end_date', nullable: false, type: 'timestamp' })
 	expectedEndDate: Date;
 
-	@Column({ name: 'real_start_date', type: 'timestamp' })
+	@Column({ name: 'real_start_date', type: 'timestamp', nullable: true })
 	realStartDate: Date;
 
-	@Column({ name: 'real_end_date', type: 'timestamp' })
+	@Column({ name: 'real_end_date', type: 'timestamp', nullable: true })
 	realEndDate: Date;
 
 	@CreateDateColumn({ name: 'created_at' })
