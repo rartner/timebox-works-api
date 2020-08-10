@@ -19,10 +19,14 @@ export class EventService {
 	}
 
 	async listEvents(): Promise<GetEventDto[]> {
-		return (await this.eventRepository.find()).map(event => toDto(event));
+		return (await this.eventRepository.find({
+			relations: ['goals', 'sideTopics']
+		})).map(event => toDto(event));
 	}
 
 	async findEvent(id: string): Promise<GetEventDto> {
-		return this.eventRepository.findOne(id).then(event => toDto(event));
+		return this.eventRepository.findOne(id, {
+			relations: ['goals', 'sideTopics']
+		}).then(event => toDto(event));
 	}
 }
