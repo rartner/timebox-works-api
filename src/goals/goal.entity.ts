@@ -4,8 +4,11 @@ import {
 	CreateDateColumn,
 	Entity,
 	PrimaryGeneratedColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
+	ManyToOne,
+	JoinColumn
 } from 'typeorm';
+import { Event } from 'src/events/event.entity';
 
 @Entity()
 export class Goal extends BaseEntity {
@@ -23,6 +26,10 @@ export class Goal extends BaseEntity {
 
 	@Column({ nullable: true, type: 'varchar', length: 500 })
 	notes: string;
+
+	@ManyToOne(type => Event, event => event.goals)
+	@JoinColumn({ name: 'event_id' })
+	event: Event;
 
 	@CreateDateColumn({ name: 'created_at' })
 	createdAt: Date;

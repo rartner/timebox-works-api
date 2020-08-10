@@ -4,8 +4,11 @@ import {
 	PrimaryGeneratedColumn,
 	Column,
 	CreateDateColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
+	OneToMany
 } from 'typeorm';
+import { SideTopic } from 'src/sidetopics/side-topic.entity';
+import { Goal } from 'src/goals/goal.entity';
 
 @Entity()
 export class Event extends BaseEntity {
@@ -30,6 +33,12 @@ export class Event extends BaseEntity {
 
 	@Column({ name: 'real_end_date', type: 'timestamp', nullable: true })
 	realEndDate: Date;
+
+	@OneToMany(type => Goal, goal => goal.event)
+	goals: Goal[];
+
+	@OneToMany(type => SideTopic, sideTopic => sideTopic.event)
+	sideTopics: SideTopic[];
 
 	@CreateDateColumn({ name: 'created_at' })
 	createdAt: Date;
