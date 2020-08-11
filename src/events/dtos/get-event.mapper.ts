@@ -17,4 +17,4 @@ const toDto = (event: Event): GetEventDto => {
 	} as GetEventDto;
 };
 
-export { toDto };
+export { toDto as toGetEventDto };

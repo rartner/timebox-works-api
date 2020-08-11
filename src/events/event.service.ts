@@ -5,7 +5,7 @@ import { CreateEventDto } from './dtos/create-event.dto';
 import { toEntity } from './dtos/create-event.mapper';
 import { Event } from './event.entity';
 import { GetEventDto } from './dtos/get-event.dto';
-import { toDto } from './dtos/get-event.mapper';
+import { toGetEventDto } from './dtos/get-event.mapper';
 
 @Injectable()
 export class EventService {
@@ -15,18 +15,22 @@ export class EventService {
 	) { }
 
 	async createEvent(createEventDto: CreateEventDto): Promise<Event> {
-		return this.eventRepository.save(toEntity(createEventDto));
+		const entity = toEntity(createEventDto);
+
+		const event = await this.eventRepository.save(entity);
+
+		return event;
 	}
 
 	async listEvents(): Promise<GetEventDto[]> {
 		return (await this.eventRepository.find({
 			relations: ['goals', 'sideTopics']
-		})).map(event => toDto(event));
+		})).map(event => toGetEventDto(event));
 	}
 
 	async findEvent(id: string): Promise<GetEventDto> {
 		return this.eventRepository.findOne(id, {
 			relations: ['goals', 'sideTopics']
-		}).then(event => toDto(event));
+		}).then(event => toGetEventDto(event));
 	}
 }

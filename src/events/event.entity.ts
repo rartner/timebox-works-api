@@ -34,7 +34,7 @@ export class Event extends BaseEntity {
 	@Column({ name: 'real_end_date', type: 'timestamp', nullable: true })
 	realEndDate: Date;
 
-	@OneToMany(type => Goal, goal => goal.event)
+	@OneToMany(type => Goal, goal => goal.event, { cascade: true })
 	goals: Goal[];
 
 	@OneToMany(type => SideTopic, sideTopic => sideTopic.event)
