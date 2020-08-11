@@ -22,15 +22,17 @@ export class EventService {
 		return event;
 	}
 
-	async listEvents(): Promise<GetEventDto[]> {
-		return (await this.eventRepository.find({
-			relations: ['goals', 'sideTopics']
-		})).map(event => toGetEventDto(event));
+	async listEvents(): Promise<Event[]> {
+		return this.eventRepository.find({
+			relations: ['goals', 'sideTopics'],
+			order: { createdAt: 'ASC' }
+		});
 	}
 
-	async findEvent(id: string): Promise<GetEventDto> {
+	async findEvent(id: string): Promise<Event> {
 		return this.eventRepository.findOne(id, {
-			relations: ['goals', 'sideTopics']
-		}).then(event => toGetEventDto(event));
+			relations: ['goals', 'sideTopics'],
+			order: { createdAt: 'ASC' }
+		});
 	}
 }

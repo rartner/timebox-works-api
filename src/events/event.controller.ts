@@ -9,21 +9,20 @@ export class EventController {
 	constructor(private eventService: EventService) { }
 
 	@Post()
-	public create(@Body() createEventDto: CreateEventDto): GetEventDto {
-		this.eventService.createEvent(createEventDto).then(event => {
-			console.log(toGetEventDto(event));
-		});
-
-		return null;
+	async create(@Body() createEventDto: CreateEventDto): Promise<GetEventDto> {
+		return this.eventService.createEvent(createEventDto)
+			.then(toGetEventDto);
 	}
 
 	@Get()
 	async list(): Promise<GetEventDto[]> {
-		return this.eventService.listEvents();
+		return this.eventService.listEvents()
+			.then(events => events.map(toGetEventDto));
 	}
 
 	@Get(':id')
 	async find(@Param() params): Promise<GetEventDto> {
-		return this.eventService.findEvent(params.id);
+		return this.eventService.findEvent(params.id)
+			.then(toGetEventDto);
 	}
 }
