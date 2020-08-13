@@ -1,8 +1,13 @@
 import { Module } from '@nestjs/common';
 import { SideTopicRepository } from './side-topic.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SideTopicController } from './side-topic.controller';
+import { SideTopicService } from './side-topic.service';
+import { EventModule } from 'src/events/event.module';
 
 @Module({
-	imports: [TypeOrmModule.forFeature([SideTopicRepository])]
+	controllers: [SideTopicController],
+	providers: [SideTopicService],
+	imports: [TypeOrmModule.forFeature([SideTopicRepository]), EventModule]
 })
 export class SideTopicModule { }
