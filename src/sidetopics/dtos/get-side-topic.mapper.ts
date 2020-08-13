@@ -8,4 +8,4 @@ const toDto = (sideTopic: SideTopic): GetSideTopicDto => {
 	} as GetSideTopicDto;
 };
 
-export { toDto };
+export { toDto as toGetSideTopicDto };

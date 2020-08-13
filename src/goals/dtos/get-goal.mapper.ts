@@ -11,4 +11,4 @@ const toDto = (goal: Goal): GetGoalDto => {
 	} as GetGoalDto;
 };
 
-export { toDto };
+export { toDto as toGetGoalDto };

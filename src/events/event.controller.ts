@@ -21,8 +21,8 @@ export class EventController {
 	}
 
 	@Get(':id')
-	async find(@Param() params): Promise<GetEventDto> {
-		return this.eventService.findEvent(params.id)
+	async find(@Param('id') id: string): Promise<GetEventDto> {
+		return this.eventService.findEvent(id)
 			.then(toGetEventDto);
 	}
 }
