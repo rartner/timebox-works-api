@@ -8,6 +8,7 @@ import { EventModule } from 'src/events/event.module';
 @Module({
 	controllers: [SideTopicController],
 	providers: [SideTopicService],
-	imports: [TypeOrmModule.forFeature([SideTopicRepository]), EventModule]
+	imports: [TypeOrmModule.forFeature([SideTopicRepository]), EventModule],
+	exports: [SideTopicService]
 })
 export class SideTopicModule { }

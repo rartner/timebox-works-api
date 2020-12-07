@@ -16,9 +16,7 @@ export class SideTopicController {
 	}
 
 	@Delete(':id')
-	async delete(@Param('id') eventId: string,
-		@Body() createSideTopicDto: CreateSideTopicDto): Promise<GetSideTopicDto> {
-		return this.sideTopicService.create(eventId, createSideTopicDto)
-			.then(toGetSideTopicDto)
+	async delete(@Param('id') id: string) {
+		this.sideTopicService.delete(id);
 	}
 }
