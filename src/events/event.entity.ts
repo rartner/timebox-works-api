@@ -22,16 +22,16 @@ export class Event extends BaseEntity {
 	@Column({ nullable: false, type: 'varchar', length: 500 })
 	description: string;
 
-	@Column({ name: 'expected_start_date', nullable: false, type: 'timestamp' })
+	@Column({ name: 'expected_start_date', nullable: false, type: 'timestamptz' })
 	expectedStartDate: Date;
 
-	@Column({ name: 'expected_end_date', nullable: false, type: 'timestamp' })
+	@Column({ name: 'expected_end_date', nullable: false, type: 'timestamptz' })
 	expectedEndDate: Date;
 
-	@Column({ name: 'real_start_date', type: 'timestamp', nullable: true })
+	@Column({ name: 'real_start_date', type: 'timestamptz', nullable: true })
 	realStartDate: Date;
 
-	@Column({ name: 'real_end_date', type: 'timestamp', nullable: true })
+	@Column({ name: 'real_end_date', type: 'timestamptz', nullable: true })
 	realEndDate: Date;
 
 	@OneToMany(type => Goal, goal => goal.event, { cascade: true })
